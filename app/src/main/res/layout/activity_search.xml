@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient"
+    android:orientation="vertical"
+    android:padding="25dp">
+
+    <RelativeLayout
+        android:id="@+id/mainContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#77F1EBF1"
+            android:orientation="horizontal"
+            android:padding="8dp"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="0sp"
+                android:layout_height="45sp"
+                android:layout_weight="2"
+                android:autofillHints=""
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/insert"
+                android:inputType="textShortMessage|textAutoCorrect|text"
+                android:selectAllOnFocus="false"
+                android:singleLine="false"
+                android:text="@string/insert"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="#A4FFFFFF"
+                android:textColorHint="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="italic"
+                tools:targetApi="o" />
+
+            <Space
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/button_search"
+                android:layout_width="45sp"
+                android:layout_height="45sp"
+                android:layout_weight="0"
+                android:backgroundTint="@android:color/transparent"
+                android:contentDescription="@android:string/search_go"
+                android:onClick="search"
+                android:scaleType="centerInside"
+                android:scrollbarSize="4dp"
+                android:tint="@android:color/white"
+                app:srcCompat="@drawable/search" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="#77F1EBF1"
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:visibility="visible"
+            tools:visibility="invisible">
+
+            <TextView
+                android:id="@+id/address2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/city"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
+
+            <TextView
+                android:id="@+id/updated_at2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/datetime"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/temp2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:text="@string/temp"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:textSize="90sp"
+                    android:textStyle="bold" />
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:id="@+id/imageThermometer"
+                    android:layout_width="50dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/temp"
+                    android:tint="#FFFFFF"
+                    app:srcCompat="@drawable/thermometer" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/status2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/weather"
+                android:textColor="#FFFFFF"
+                android:textSize="30sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#00FFFFFF"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imageHumidity"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:contentDescription="@string/humidity"
+                        android:src="@drawable/humidity"
+                        android:tint="#FFFFFF" />
+
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/humidity"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/humidity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/data_humidity_search"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#00F1EBF1"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/imageWind"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:contentDescription="@string/wind"
+                        android:src="@drawable/wind"
+                        android:tint="#FFFFFF" />
+
+                    <Space
+                        android:layout_width="15dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wind"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/wind"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/data_wind_search"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp" />
+
+            <ImageButton
+                android:id="@+id/addButton"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_gravity="end"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="@string/appbar_scrolling_view_behavior"
+                android:scaleType="centerInside"
+                android:tint="#FFFFFF"
+                app:srcCompat="@drawable/plus" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/loader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

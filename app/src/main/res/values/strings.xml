@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Weather Easy</string>
+    <string name="city">DHAKA, BD</string>
+    <string name="datetime">20 April 2012, 20:08 PM</string>
+    <string name="weather">Clear Sky</string>
+    <string name="data_sunrise">06:40 AM</string>
+    <string name="data_sunset">06:40 AM</string>
+    <string name="city_search">DHAKA, BD</string>
+    <string name="datetime_search">20 April 2012, 20:08 PM</string>
+    <string name="temp">29°C</string>
+    <string name="insert">Digite aqui a Cidade</string>
+    <string name="weather_search">Clear Sky</string>
+    <string name="temp_search">29°C</string>
+    <string name="min_temp">Min Temp: 05:05 AM</string>
+    <string name="max_temp">Max Temp: 05:05 PM</string>
+    <string name="data_sunrise_search">06:40 AM</string>
+    <string name="data_sunset_search">06:40 AM</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="humidity">Umidade</string>
+    <string name="sunset">Pôr do Sol</string>
+    <string name="data_wind">14m/h</string>
+    <string name="wind">Vento</string>
+    <string name="data_pressure">1013,0 mb</string>
+    <string name="data_humidity">41%</string>
+    <string name="sunrise">Nascer do sol</string>
+    <string name="pressure">Pressão</string>
+    <string name="data_humidity_search">41%</string>
+    <string name="data_wind_search">14 km/h</string>
+    <string name="search_button">searchButton</string>
+</resources>
