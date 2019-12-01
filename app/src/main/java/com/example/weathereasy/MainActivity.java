@@ -37,24 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        searchButton = (ImageButton) findViewById(R.id.searchButton);
-        searchButton.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View V){;
-                //
-            }
-        });
-
-        addressTxt = findViewById(R.id.address);
-        updated_atTxt = findViewById(R.id.updated_at);
-        statusTxt = findViewById(R.id.status);
-        tempTxt = findViewById(R.id.temp);
-        temp_minTxt = findViewById(R.id.temp_min);
-        temp_maxTxt = findViewById(R.id.temp_max);
-        sunriseTxt = findViewById(R.id.sunrise);
-        sunsetTxt = findViewById(R.id.sunset);
-        windTxt = findViewById(R.id.wind);
-        pressureTxt = findViewById(R.id.pressure);
-        humidityTxt = findViewById(R.id.humidity);
 
 
         new weather().execute();
@@ -72,8 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         protected String doInBackground(String... args) {
-            String response = HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API);
-            return response;
+            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API);
         }
 
         @Override
@@ -89,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
                 double aux = Double.parseDouble(main.getString("temp"));
 
-                Long updatedAt = jsonObj.getLong("dt");
+                long updatedAt = jsonObj.getLong("dt");
                 String updatedAtText = new SimpleDateFormat("dd/MM/yyyy HH:mm", local).format(new Date(updatedAt * 1000));
                 String temp =  String.valueOf(format.format(aux)) + "°C";
                 String tempMin = "Temp Min: " + main.getString("temp_min") + "°C";
@@ -97,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                 String pressure = main.getString("pressure") + " mb";
                 String humidity = main.getString("humidity") + "%";
 
-                Long sunrise = sys.getLong("sunrise");
-                Long sunset = sys.getLong("sunset");
+                long sunrise = sys.getLong("sunrise");
+                long sunset = sys.getLong("sunset");
                 String windSpeed = wind.getString("speed") + " km/h";
                 String weatherDescription = weather.getString("description");
 
