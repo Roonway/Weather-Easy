@@ -2,26 +2,23 @@ package com.example.weathereasy.models;
 
 public class City {
     private String name;
-    private String countryCode;
-    private double log;
-    private double lat;
-    private Weather weather;
+    private Main main;
+    private Sys sys;
 
 
     public City() {
     }
 
-    public City(String name, String countryCode) {
+    public City(String name) {
         this.name = name;
-        this.countryCode = countryCode;
     }
 
-    public Weather getWeather() {
-        return weather;
+    public Main getMain() {
+        return main;
     }
 
-    public void setWeather(Weather weather) {
-        this.weather = weather;
+    public void setMain(Main main) {
+        this.main = main;
     }
 
     public String getName() {
@@ -32,17 +29,17 @@ public class City {
         this.name = name;
     }
 
-    public String getCountryCode() {
-        return countryCode;
+    public Sys getSys() {
+        return sys;
     }
 
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
+    public void setSys(Sys sys) {
+        this.sys = sys;
     }
 
     @Override
     public String toString() {
-        return  name + ", " + countryCode  + '\n';
+        return  name + ", " + sys.getCountry();
     }
 
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#77F1EBF1"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp">
+
+    <TextView
+        android:id="@+id/lista_personalizada_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/lista_personalizada_description"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:text="@string/description"
+        android:textSize="18sp" />
+
+</LinearLayout>

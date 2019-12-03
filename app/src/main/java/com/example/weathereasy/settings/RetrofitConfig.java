@@ -1,16 +1,16 @@
 package com.example.weathereasy.settings;
 
 import retrofit2.Retrofit;
-import retrofit2.converter.jackson.JacksonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitConfig {
 
     private final Retrofit retrofit;
 
-    public RetrofitConfig(String cityName){
+    public RetrofitConfig(){
         this.retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.openweathermap.org/data/2.5/")
-                .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
 

@@ -2,7 +2,7 @@
     <string name="app_name">Weather Easy</string>
     <string name="city">DHAKA, BD</string>
     <string name="datetime">20 April 2012, 20:08 PM</string>
-    <string name="weather">Clear Sky</string>
+    <string name="main">Clear Sky</string>
     <string name="data_sunrise">06:40 AM</string>
     <string name="data_sunset">06:40 AM</string>
     <string name="city_search">DHAKA, BD</string>
@@ -29,4 +29,6 @@
     <string name="search_button">searchButton</string>
     <string name="adicionar">Adicionar</string>
     <string name="deletar">Deletar</string>
+    <string name="description">descriçao</string>
+    <string name="title">Titulo</string>
 </resources>

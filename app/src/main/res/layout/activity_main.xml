@@ -90,16 +90,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="15dp" />
 
-            <LinearLayout
+            <ListView
+                android:id="@+id/listCityWeather"
                 android:layout_width="match_parent"
-                android:layout_height="553dp"
-                android:background="#77F1EBF1"
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:visibility="visible"
-                tools:visibility="visible">
-
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:foregroundTint="#FFFFFF"
+                android:visibility="visible" />
 
         </LinearLayout>
 
