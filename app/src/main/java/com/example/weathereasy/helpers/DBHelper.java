@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String BASE_NAME = "weatherDB";
-    private static final int VERSION_DB = 9;
+    private static final int VERSION_DB = 10;
 
 
     public DBHelper(Context context) {
@@ -79,9 +79,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return listaCidades;
     }
 
-    public void removerCidade(String name) {
-        SQLiteDatabase db = getWritableDatabase();
-        db.delete("cidade", "nome" + "=" + name, null);
+    public void removerCidade(City city) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete("cidade", "nome"+"=?", new String[]{city.getName()});
         db.close();
     }
 }
