@@ -79,7 +79,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return listaCidades;
     }
 
-    public void removerCidade (String name) {
+    public void removerCidade(String name) {
         SQLiteDatabase db = getWritableDatabase();
         db.delete("cidade", "nome" + "=" + name, null);
         db.close();

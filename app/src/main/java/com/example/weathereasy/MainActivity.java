@@ -1,6 +1,7 @@
 package com.example.weathereasy;
 
 import android.database.sqlite.SQLiteConstraintException;
+import android.database.sqlite.SQLiteException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             DBHelper dbh = new DBHelper(this);
             dbh.adicionarCidade(obj);
 
-        } catch (SQLiteConstraintException e) {
+        } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getApplicationContext(), "Cidade já Existe em sua Lista", LENGTH_LONG);
             toast.show();
         }
@@ -93,8 +94,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void removeCity(String string) {
-        DBHelper dbh = new DBHelper(this);
-        dbh.removerCidade(string);
+        try {
+            DBHelper dbh = new DBHelper(this);
+            dbh.removerCidade(string);
+        } catch (SQLiteException e) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Ocorreu um erro", LENGTH_LONG);
+            toast.show();
+        }
 
 
     }
