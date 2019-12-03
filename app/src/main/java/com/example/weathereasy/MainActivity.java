@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             DBHelper dbh = new DBHelper(this);
             dbh.adicionarCidade(obj);
 
-        } catch (SQLiteException e) {
+        } catch (SQLiteConstraintException e) {
             Toast toast = Toast.makeText(getApplicationContext(), "Cidade já Existe em sua Lista", LENGTH_LONG);
             toast.show();
         }

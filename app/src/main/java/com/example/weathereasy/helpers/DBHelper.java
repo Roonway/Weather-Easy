@@ -13,7 +13,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     private static final String BASE_NAME = "weatherDB";
-    private static final int VERSION_DB = 7;
+    private static final int VERSION_DB = 9;
 
 
     public DBHelper(Context context) {
@@ -23,10 +23,10 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String sqlCreateTableCidade = "CREATE TABLE cidade("
+        String sqlCreateTableCidade = "CREATE TABLE IF NOT EXISTS cidade("
                 + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "nome VARCHAR(250) NOT NULL UNIQUE"
-                + ")";
+                + "nome TEXT NOT NULL,"
+                + "UNIQUE(nome))";
 
         db.execSQL(sqlCreateTableCidade);
 
