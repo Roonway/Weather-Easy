@@ -1,31 +1,27 @@
 package com.example.weathereasy.models;
 
 public class City {
-    private int id;
     private String name;
     private String countryCode;
-    private short log;
-    private short lat;
+    private double log;
+    private double lat;
+    private Weather weather;
 
 
     public City() {
     }
 
-    public City(int id, String name, String countryCode, short log, short lat) {
-        this.id = id;
+    public City(String name, String countryCode) {
         this.name = name;
         this.countryCode = countryCode;
-        this.log = log;
-        this.lat = lat;
     }
 
-
-    public int getId() {
-        return id;
+    public Weather getWeather() {
+        return weather;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWeather(Weather weather) {
+        this.weather = weather;
     }
 
     public String getName() {
@@ -44,20 +40,9 @@ public class City {
         this.countryCode = countryCode;
     }
 
-    public short getLog() {
-        return log;
-    }
-
-    public void setLog(short log) {
-        this.log = log;
-    }
-
-    public short getLat() {
-        return lat;
-    }
-
-    public void setLat(short lat) {
-        this.lat = lat;
+    @Override
+    public String toString() {
+        return  name + ", " + countryCode  + '\n';
     }
 
 }

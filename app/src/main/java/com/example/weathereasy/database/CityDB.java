@@ -1,23 +1,25 @@
-package Models;
+package com.example.weathereasy.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import androidx.annotation.Nullable;
 
+import com.example.weathereasy.models.City;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CityDB extends SQLiteOpenHelper {
 
 
-    private static final String BASE_NAME = "WeatherDB";
+    private static final String BASE_NAME = "weatherDB";
     private static final int VERSION_DB = 1;
 
 
-    public CityDB(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
+    public CityDB(Context context) {
         super(context, BASE_NAME, null, VERSION_DB);
     }
 
@@ -25,11 +27,10 @@ public class CityDB extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         String sqlCreateTableCidade = "CREATE TABLE cidade("
-                                     +"id INTEGER PRIMARY KEY,"
-                                     +"nome TEXT,"
-                                     +"log INTEGER,"
-                                     +"lat INTEGER"
-                                     +")" ;
+                + "id INTEGER PRIMARY KEY,"
+                + "nome VARCHAR(250),"
+                + "country_code VARCHAR(5)"
+                + ")";
 
         db.execSQL(sqlCreateTableCidade);
     }
@@ -44,24 +45,25 @@ public class CityDB extends SQLiteOpenHelper {
 
     }
 
-    public void adicionarCidade (City cidade){
+    public void adicionarCidade(City cidade) {
 
         SQLiteDatabase db = getReadableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put("id", cidade.getID());
-        cv.put("nome", cidade.getNome());
-        cv.put("log", cidade.getLog());
-        cv.put("lat", cidade.getLat());
+
+        cv.put("nome", cidade.getName());
+        cv.put("country_code", cidade.getCountryCode());
 
         db.insert("cidade", null, cv);
 
         db.close();
     }
 
+
+
     public List<City> selectTodasCidades() {
 
-        List<City> listaCidades = new ArrayList<Citys>();
+        List<City> listaCidades = new ArrayList<City>();
 
         SQLiteDatabase db = getReadableDatabase();
 
@@ -72,17 +74,13 @@ public class CityDB extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 City cidade = new City();
-                cidade.setID(c.getInt(0));
-                cidade.setNome(c.getString(1));
-                cidade.setLog(c.getInt(2));
-                cidade.setLat(c.getInt(3));
+                cidade.setName(c.getString(0));
+                cidade.setCountryCode(c.getString(1));
 
                 listaCidades.add(cidade);
-            }while(c.moveToNext());
+            } while (c.moveToNext());
         }
         db.close();
         return listaCidades;
     }
-
-
 }

@@ -60,13 +60,13 @@
                 android:weightSum="2">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/addButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#924CAF50"
                     android:drawableStart="@android:color/background_light"
-                    android:text="Adicionar"
+                    android:text="@string/adicionar"
                     android:textColor="#FFFFFF"
                     android:textSize="14sp" />
 
@@ -76,12 +76,12 @@
                     android:layout_weight="0" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/deleteButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:backgroundTint="#92FF0000"
-                    android:text="Deletar"
+                    android:text="@string/deletar"
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>

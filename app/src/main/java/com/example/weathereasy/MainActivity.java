@@ -1,48 +1,81 @@
 package com.example.weathereasy;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.androdocs.httprequest.HttpRequest;
+import com.example.weathereasy.database.CityDB;
+import com.example.weathereasy.models.City;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
+import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
-    String CITY = "recife";
     String API = "e010e3bc6198cb9359ac35e4fc68dd10";
-    static Locale local = new Locale("pt", "BR");
-    static NumberFormat format = NumberFormat.getInstance(local);
 
-
-    TextView addressTxt, updated_atTxt, statusTxt, tempTxt, temp_minTxt, temp_maxTxt, sunriseTxt,
-            sunsetTxt, windTxt, pressureTxt, humidityTxt;
-
-    ImageButton searchButton;
+    Button addButton, deleteButton;
+    EditText cityName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        format.setMaximumFractionDigits(1);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        cityName = findViewById(R.id.editText);
 
+        addButton = (Button) findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Buscar e Adicionar cidade a lista
+                new cityThread(cityName.getText().toString()).execute();
 
-        new weather().execute();
+            }
+        });
+        deleteButton = (Button) findViewById(R.id.deleteButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Busca no Banco a cidade e a deleta
+            }
+        });
     }
 
-    class weather extends AsyncTask<String, Void, String> {
+    public void addCity(City obj){
+        CityDB dbh = new CityDB(this);
+        dbh.adicionarCidade(obj);
+
+    }
+    public void removeCity(City obj){
+        CityDB dbh = new CityDB(this);
+        dbh.de(obj);
+
+    }
+
+
+
+    class cityThread extends AsyncTask<String, Void, String> {
+        private final String cityName;
+
+        cityThread(String cityName) {
+            this.cityName = cityName;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -53,56 +86,28 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.errorText).setVisibility(View.GONE);
         }
 
+
+        @Override
         protected String doInBackground(String... args) {
-            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + CITY + "&units=metric&appid=" + API);
+            return HttpRequest.excuteGet("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=metric&appid=" + API);
         }
 
         @Override
         protected void onPostExecute(String result) {
-
+            City cidade = new City();
 
             try {
                 JSONObject jsonObj = new JSONObject(result);
-                JSONObject main = jsonObj.getJSONObject("main");
                 JSONObject sys = jsonObj.getJSONObject("sys");
-                JSONObject wind = jsonObj.getJSONObject("wind");
-                JSONObject weather = jsonObj.getJSONArray("weather").getJSONObject(0);
 
-                double aux = Double.parseDouble(main.getString("temp"));
-
-                long updatedAt = jsonObj.getLong("dt");
-                String updatedAtText = new SimpleDateFormat("dd/MM/yyyy HH:mm", local).format(new Date(updatedAt * 1000));
-                String temp =  String.valueOf(format.format(aux)) + "°C";
-                String tempMin = "Temp Min: " + main.getString("temp_min") + "°C";
-                String tempMax = "Temp Max: " + main.getString("temp_max") + "°C";
-                String pressure = main.getString("pressure") + " mb";
-                String humidity = main.getString("humidity") + "%";
-
-                long sunrise = sys.getLong("sunrise");
-                long sunset = sys.getLong("sunset");
-                String windSpeed = wind.getString("speed") + " km/h";
-                String weatherDescription = weather.getString("description");
-
-                String address = jsonObj.getString("name") + ", " + sys.getString("country");
+                cidade.setName(cityName);
+                cidade.setCountryCode(sys.getString("country"));
 
 
-                /* Populating extracted data into our views */
-                addressTxt.setText(address);
-                updated_atTxt.setText(updatedAtText);
-                statusTxt.setText(weatherDescription.toUpperCase());
-                tempTxt.setText(temp);
-                temp_minTxt.setText(tempMin);
-                temp_maxTxt.setText(tempMax);
-                sunriseTxt.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sunrise * 1000)));
-                sunsetTxt.setText(new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(new Date(sunset * 1000)));
-                windTxt.setText(windSpeed);
-                pressureTxt.setText(pressure);
-                humidityTxt.setText(humidity);
 
                 /* Views populated, Hiding the loader, Showing the main design */
                 findViewById(R.id.loader).setVisibility(View.GONE);
                 findViewById(R.id.mainContainer).setVisibility(View.VISIBLE);
-
 
             } catch (JSONException e) {
                 findViewById(R.id.loader).setVisibility(View.GONE);
