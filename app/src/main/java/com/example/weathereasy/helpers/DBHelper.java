@@ -29,7 +29,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "UNIQUE(nome))";
 
         db.execSQL(sqlCreateTableCidade);
-
     }
 
     @Override
@@ -54,8 +53,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.close();
     }
-
-
 
     public List<City> selectTodasCidades() {
 

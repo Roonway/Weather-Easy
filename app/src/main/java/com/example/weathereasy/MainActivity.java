@@ -31,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
     String API = "e010e3bc6198cb9359ac35e4fc68dd10";
     String UNIT = "metric";
 
-    private List<City> cities = new ArrayList<>();
+    public String[] cities = {"Recife", "Natal", "Salvador", "Fortaleza", "Caruaru"};
+
+    private List<City> listCities = new ArrayList<>();
     private WeatherAdapterCustom weatherAdapter;
 
     Button addButton, deleteButton;
@@ -45,17 +47,25 @@ public class MainActivity extends AppCompatActivity {
 
         cityName = findViewById(R.id.editText);
         listCityWeather = findViewById(R.id.listCityWeather);
-        addButton = (Button) findViewById(R.id.addButton);
-        deleteButton = (Button) findViewById(R.id.deleteButton);
+        addButton = findViewById(R.id.addButton);
+        deleteButton = findViewById(R.id.deleteButton);
 
-        weatherAdapter = new WeatherAdapterCustom(cities, this);
+        weatherAdapter = new WeatherAdapterCustom(listCities, this);
+
+        //add cidades
+        for(int i = 0; i < cities.length; i++){
+
+            addCity(new City(cities[i]));
+        }
+
+
+
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Buscar e Adicionar cidade a lista
                 addCity(new City(cityName.getText().toString()));
-                weatherAdapter.clear();
                 new UpdateThread().execute();
 
             }
@@ -64,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Busca no Banco a cidade e a deleta
-                removeCity(cityName.getText().toString());
-                weatherAdapter.clear();
+                removeCity(new City(cityName.getText().toString()));
                 new UpdateThread().execute();
             }
         });
@@ -93,16 +102,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void removeCity(String string) {
+    public void removeCity(City obj) {
         try {
-            DBHelper dbh = new DBHelper(this);
-            dbh.removerCidade(string);
+            DBHelper dbHelper = new DBHelper(this);
+            dbHelper.removerCidade(obj);
         } catch (SQLiteException e) {
             Toast toast = Toast.makeText(getApplicationContext(), "Ocorreu um erro", LENGTH_LONG);
             toast.show();
         }
-
-
     }
 
     class UpdateThread extends AsyncTask<String, Void, Void> {
@@ -125,6 +132,8 @@ public class MainActivity extends AppCompatActivity {
             DBHelper db = new DBHelper(getApplicationContext());
             List<City> listCites = db.selectTodasCidades();
 
+            weatherAdapter.clear();
+
             for (City city : listCites) {
 
                 Call<City> call = new RetrofitConfig().getWeatherService().getCityWeather(city.getName(), UNIT, API);
@@ -132,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<City> call, Response<City> response) {
                         City cidade = response.body();
-                        cities.add(cidade);
+                        listCities.add(cidade);
                         weatherAdapter.notifyDataSetChanged();
                     }
 
@@ -145,7 +154,6 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-
             return null;
         }
 

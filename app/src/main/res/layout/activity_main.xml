@@ -39,7 +39,6 @@
                     android:inputType="textShortMessage|textAutoCorrect|text"
                     android:selectAllOnFocus="false"
                     android:singleLine="false"
-                    android:text="@string/insert"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
                     android:textColor="#A4FFFFFF"
                     android:textColorHint="#FFFFFF"
