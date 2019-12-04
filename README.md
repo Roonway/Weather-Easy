@@ -1,9 +1,11 @@
 # Weather-Easy
 
 Alunos:
-Gregory Emidio da Silva Santos - 172091166 
+Gregory Emidio da Silva Santos - 172091166
+
 Roney Joab Lemos Mendes - 172091812
 
+App testada na versão 10 do Android
 https://github.com/Roonway/WeatherEasy 
 
 Na tela principal é mostrada a lista de cidades já cadastradas.
